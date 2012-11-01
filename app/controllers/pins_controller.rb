@@ -32,11 +32,6 @@ class PinsController < ApplicationController
     end
   end
 
-  # GET /pins/1/edit
-  def edit
-    @pin = Pin.find(params[:id])
-  end
-
   # POST /pins
   # POST /pins.json
   def create
@@ -48,22 +43,6 @@ class PinsController < ApplicationController
         format.json { render json: @pin, status: :created, location: @pin }
       else
         format.html { render action: "new" }
-        format.json { render json: @pin.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PUT /pins/1
-  # PUT /pins/1.json
-  def update
-    @pin = Pin.find(params[:id])
-
-    respond_to do |format|
-      if @pin.update_attributes(params[:pin])
-        format.html { redirect_to @pin, notice: 'Pin was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
         format.json { render json: @pin.errors, status: :unprocessable_entity }
       end
     end
