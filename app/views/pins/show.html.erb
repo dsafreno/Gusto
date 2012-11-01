@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Latitude:</b>
+  <%= @pin.latitude %>
+</p>
+
+<p>
+  <b>Longitude:</b>
+  <%= @pin.longitude %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @pin.user_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_pin_path(@pin) %> |
+<%= link_to 'Back', pins_path %>
