@@ -1,7 +1,7 @@
 Gusto::Application.routes.draw do
-  resources :pins
+  resources :pins, :only => [:new, :create, :index, :show, :destroy]
 
-  resources :users
+  resources :users, :only => [:new, :create, :edit, :update]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
