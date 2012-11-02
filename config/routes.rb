@@ -1,6 +1,12 @@
 Gusto::Application.routes.draw do
   root to: "users#index"
-  resources :pins, :only => [:new, :create, :index, :show, :destroy]
+  resources :pins, :only => [:new, :create, :index, :show, :destroy] do
+    member do
+      get 'hourly'
+      get 'daily'
+      get 'historical'
+    end
+  end
 
   resources :users, :only => [:index, :new, :create, :edit, :update]
 
