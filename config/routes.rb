@@ -4,7 +4,7 @@ Gusto::Application.routes.draw do
 
   resources :users, :only => [:index, :new, :create, :edit, :update]
 
-  resources :sessions, :only => [:create, :destroy]
+  resources :sessions, :only => [:new, :create, :destroy]
 
   match "/signup" => "users#new"
   match "/signin" => "sessions#new"

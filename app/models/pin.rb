@@ -9,5 +9,5 @@ class Pin < ActiveRecord::Base
   validates :latitude, numericality:
     {less_than_or_equal_to: 90.0, greater_than_or_equal_to: -90.0 }
   validates :longitude, numericality:
-    {less_than_or_equal_to: 90.0, greater_than_or_equal_to: -90.0 }
+    {less_than_or_equal_to: 180.0, greater_than_or_equal_to: -180.0 }
 end

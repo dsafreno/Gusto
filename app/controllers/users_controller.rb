@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  def index
+    redirect_to "/pins" if session[:user_id]
+  end
   # GET /users/1
   # GET /users/1.json
   def show

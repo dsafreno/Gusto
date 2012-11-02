@@ -1,4 +1,5 @@
 <div data-role="header">
+  <%= link_to "Sign out", "/sessions/destroy", method: :delete %>
   <h1>My Pins</h1>
   <%= link_to 'New Pin', new_pin_path, "data-icon" => "plus", "class" => "ui-btn-right" %>
 </div>
@@ -11,4 +12,3 @@
   </ul>
 </div>
 <br />
-

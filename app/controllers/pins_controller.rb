@@ -1,3 +1,5 @@
+require 'open-uri'
+require 'json'
 class PinsController < ApplicationController
   # GET /pins
   # GET /pins.json
@@ -15,6 +17,13 @@ class PinsController < ApplicationController
   # GET /pins/1.json
   def show
     @pin = Pin.find(params[:id])
+    open("http://api.wunderground.com/api/c86212bca3562794/geolookup/conditions/q/#{@pin.latitude},#{@pin.longitude}.json") do |f|
+      json_string = f.read
+      parsed_json = JSON.parse(json_string)
+      @location = parsed_json['location']['city']
+      @wind_mph = parsed_json['current_observation']['wind_mph']
+      @wind_dir = parsed_json['current_observation']['wind_dir']
+    end
 
     respond_to do |format|
       format.html # show.html.erb
