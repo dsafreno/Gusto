@@ -1,27 +1,15 @@
-<h1>Listing pins</h1>
+<div data-role="header">
+  <h1>My Pins</h1>
+  <%= link_to 'New Pin', new_pin_path, "data-icon" => "plus", "class" => "ui-btn-right" %>
+</div>
 
-<table>
-  <tr>
-    <th>Latitude</th>
-    <th>Longitude</th>
-    <th>User</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @pins.each do |pin| %>
-  <tr>
-    <td><%= pin.latitude %></td>
-    <td><%= pin.longitude %></td>
-    <td><%= pin.user_id %></td>
-    <td><%= link_to 'Show', pin %></td>
-    <td><%= link_to 'Edit', edit_pin_path(pin) %></td>
-    <td><%= link_to 'Destroy', pin, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
+<div data-role="content">
+  <% @pins.each do |pin| %>
+    <li><%= pin.latitude %>, <%= pin.longitude %>
+      <td><%= link_to 'Show', pin %></td>
+      <td><%= link_to 'Destroy', pin, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </li>
+  <% end %>
+</div>
 <br />
 
-<%= link_to 'New Pin', new_pin_path %>

@@ -1,4 +1,14 @@
 class UsersController < ApplicationController
+  # GET /users/1
+  # GET /users/1.json
+  def show
+    @user = User.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @user }
+    end
+  end
 
   # GET /users/new
   # GET /users/new.json
@@ -23,8 +33,9 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to "/pins", notice: 'User was successfully created.' }
         format.json { render json: @user, status: :created, location: @user }
+        session[:user_id] = @user.id
       else
         format.html { render action: "new" }
         format.json { render json: @user.errors, status: :unprocessable_entity }

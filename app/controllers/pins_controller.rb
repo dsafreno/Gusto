@@ -2,7 +2,8 @@ class PinsController < ApplicationController
   # GET /pins
   # GET /pins.json
   def index
-    @pins = Pin.all
+    redirect_to "/signup" unless session[:user_id]
+    @pins = Pin.where("user_id = ?", session[:user_id])
 
     respond_to do |format|
       format.html # index.html.erb

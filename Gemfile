@@ -30,7 +30,6 @@ group :production do
 end
 
 gem 'jquery-rails'
-gem 'jquery_mobile_rails'
 
 
 # To use ActiveModel has_secure_password
