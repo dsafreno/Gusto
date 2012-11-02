@@ -4,12 +4,11 @@
 </div>
 
 <div data-role="content">
-  <% @pins.each do |pin| %>
-    <li><%= pin.latitude %>, <%= pin.longitude %>
-      <td><%= link_to 'Show', pin %></td>
-      <td><%= link_to 'Destroy', pin, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </li>
-  <% end %>
+  <ul data-role="listview">
+    <% @pins.each do |pin| %>
+      <li><%= link_to "#{pin.latitude}, #{pin.longitude}", pin %></li>
+    <% end %>
+  </ul>
 </div>
 <br />
 

@@ -1,7 +1,8 @@
 Gusto::Application.routes.draw do
+  root to: "users#index"
   resources :pins, :only => [:new, :create, :index, :show, :destroy]
 
-  resources :users, :only => [:new, :create, :show, :edit, :update]
+  resources :users, :only => [:index, :new, :create, :edit, :update]
 
   resources :sessions, :only => [:create, :destroy]
 
