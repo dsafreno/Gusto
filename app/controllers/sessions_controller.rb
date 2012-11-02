@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
     current_user = user.authenticate(params[:session][:password]) if user
     if current_user
       session[:user_id] = current_user.id
-      redirect_to "/dashboard"
+      redirect_to "/pins"
     else
       flash[:error] = "Error signing in: username or password invalid."
       redirect_to "/signup"
