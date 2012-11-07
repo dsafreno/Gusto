@@ -18,15 +18,23 @@ class PinsController < ApplicationController
   # GET /pins/1.json
   def show
     @pin = Pin.find(params[:id])
-    unless @@cache[@pin]
-      @@cache[@pin] = {}
-      open("http://api.wunderground.com/api/c86212bca3562794/geolookup/conditions/q/#{@pin.latitude},#{@pin.longitude}.json") do |f|
-        json_string = f.read
-        parsed_json = JSON.parse(json_string)
-        @@cache[@pin][:location] = parsed_json['location']['city']
-        @@cache[@pin][:wind_mph] = parsed_json['current_observation']['wind_mph']
-        @@cache[@pin][:wind_dir] = parsed_json['current_observation']['wind_dir']
-      end
+    @@cache[@pin] = {}
+    open("http://api.wunderground.com/api/c86212bca3562794/geolookup/conditions/q/#{@pin.latitude},#{@pin.longitude}.json") do |f|
+      json_string = f.read
+      parsed_json = JSON.parse(json_string)
+      @@cache[@pin][:location] = parsed_json['location']['city']
+      @@cache[@pin][:wind_mph] = parsed_json['current_observation']['wind_mph']
+      @@cache[@pin][:wind_dir] = parsed_json['current_observation']['wind_dir']
+    end
+    open("http://api.wunderground.com/api/c86212bca3562794/hourly/q/#{@pin.latitude},#{@pin.longitude}.json") do |f|
+      json_string = f.read
+      parsed_json = JSON.parse(json_string)
+      @@cache[@pin][:hourly] = parsed_json['hourly_forecast']
+    end
+    open("http://api.wunderground.com/api/c86212bca3562794/forecast10day/q/#{@pin.latitude},#{@pin.longitude}.json") do |f|
+      json_string = f.read
+      parsed_json = JSON.parse(json_string)
+      @@cache[@pin][:daily] = parsed_json['forecast']['simpleforecast']['forecastday']
     end
     @location = @@cache[@pin][:location]
     @wind_mph = @@cache[@pin][:wind_mph]
@@ -40,19 +48,10 @@ class PinsController < ApplicationController
 
   def hourly
     @pin = Pin.find(params[:id])
-    unless @@cache[@pin]
-      @@cache[@pin] = {}
-      open("http://api.wunderground.com/api/c86212bca3562794/geolookup/conditions/q/#{@pin.latitude},#{@pin.longitude}.json") do |f|
-        json_string = f.read
-        parsed_json = JSON.parse(json_string)
-        @@cache[@pin][:location] = parsed_json['location']['city']
-        @@cache[@pin][:wind_mph] = parsed_json['current_observation']['wind_mph']
-        @@cache[@pin][:wind_dir] = parsed_json['current_observation']['wind_dir']
-      end
-      @location = @@cache[@pin][:location]
-      @wind_mph = @@cache[@pin][:wind_mph]
-      @wind_dir = @@cache[@pin][:wind_dir]
-    end
+    @location = @@cache[@pin][:location]
+    @wind_mph = @@cache[@pin][:wind_mph]
+    @wind_dir = @@cache[@pin][:wind_dir]
+    @hourlies = @@cache[@pin][:hourly]
 
     respond_to do |format|
       format.html # show.html.erb
@@ -62,41 +61,10 @@ class PinsController < ApplicationController
 
   def daily
     @pin = Pin.find(params[:id])
-    unless @@cache[@pin]
-      @@cache[@pin] = {}
-      open("http://api.wunderground.com/api/c86212bca3562794/geolookup/conditions/q/#{@pin.latitude},#{@pin.longitude}.json") do |f|
-        json_string = f.read
-        parsed_json = JSON.parse(json_string)
-        @@cache[@pin][:location] = parsed_json['location']['city']
-        @@cache[@pin][:wind_mph] = parsed_json['current_observation']['wind_mph']
-        @@cache[@pin][:wind_dir] = parsed_json['current_observation']['wind_dir']
-      end
-      @location = @@cache[@pin][:location]
-      @wind_mph = @@cache[@pin][:wind_mph]
-      @wind_dir = @@cache[@pin][:wind_dir]
-    end
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @pin }
-    end
-  end
-
-  def historical
-    @pin = Pin.find(params[:id])
-    unless @@cache[@pin]
-      @@cache[@pin] = {}
-      open("http://api.wunderground.com/api/c86212bca3562794/geolookup/conditions/q/#{@pin.latitude},#{@pin.longitude}.json") do |f|
-        json_string = f.read
-        parsed_json = JSON.parse(json_string)
-        @@cache[@pin][:location] = parsed_json['location']['city']
-        @@cache[@pin][:wind_mph] = parsed_json['current_observation']['wind_mph']
-        @@cache[@pin][:wind_dir] = parsed_json['current_observation']['wind_dir']
-      end
-      @location = @@cache[@pin][:location]
-      @wind_mph = @@cache[@pin][:wind_mph]
-      @wind_dir = @@cache[@pin][:wind_dir]
-    end
+    @location = @@cache[@pin][:location]
+    @wind_mph = @@cache[@pin][:wind_mph]
+    @wind_dir = @@cache[@pin][:wind_dir]
+    @days = @@cache[@pin][:daily]
 
     respond_to do |format|
       format.html # show.html.erb

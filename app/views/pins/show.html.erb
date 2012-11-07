@@ -3,7 +3,7 @@
   <h1><%= @location %></h1>
 </div>
 <div data-role="content">
-    <h1 style="text-align: center"><%= @wind_mph %> mph <%= @wind_dir %></h1>
+  <h1 style="text-align: center"><%= @wind_mph %> mph <%= @wind_dir %></h1>
   <img style="display: block; margin-left: auto; margin-right: auto", src=<%="https://maps.googleapis.com/maps/api/staticmap?center=#{@pin.latitude},#{@pin.longitude}&zoom=11&size=300x250&sensor=false&key=AIzaSyADHdvKiue90VyVvgvgg37LJfkQMesWNWo"%>
 </div>
 <div data-role="footer" data-id="mainFooter" data-position="fixed">
