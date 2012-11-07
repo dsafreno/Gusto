@@ -27,10 +27,10 @@ class PinsController < ApplicationController
         @@cache[@pin][:wind_mph] = parsed_json['current_observation']['wind_mph']
         @@cache[@pin][:wind_dir] = parsed_json['current_observation']['wind_dir']
       end
-      @location = @@cache[@pin][:location]
-      @wind_mph = @@cache[@pin][:wind_mph]
-      @wind_dir = @@cache[@pin][:wind_dir]
     end
+    @location = @@cache[@pin][:location]
+    @wind_mph = @@cache[@pin][:wind_mph]
+    @wind_dir = @@cache[@pin][:wind_dir]
 
     respond_to do |format|
       format.html # show.html.erb
