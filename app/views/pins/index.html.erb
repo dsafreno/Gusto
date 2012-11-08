@@ -1,14 +1,19 @@
-<div data-role="header">
+<div data-role="header" id="page_header">
   <%= link_to "Sign out", "/sessions/destroy", method: :delete %>
   <h1>My Pins</h1>
-  <%= link_to 'New Pin', new_pin_path, "data-icon" => "plus", "class" => "ui-btn-right" %>
+  <a onclick="user_loc_create()" href="#">CurrLoc</a>
 </div>
 
 <div data-role="content">
+  <%= render "search_form" %>
+  <%= render "loc_form" %>
   <ul data-role="listview">
     <% @pins.each do |pin| %>
-      <li><%= link_to "#{pin.latitude}, #{pin.longitude}", pin %></li>
+      <li><%= link_to pin.name, pin %></li>
     <% end %>
   </ul>
 </div>
 <br/>
+<script>
+navigator.geolocation.getCurrentPosition(foundLocation, noLocation);
+</script>

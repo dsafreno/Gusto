@@ -1,10 +1,10 @@
 <div data-role="header">
   <%= link_to 'Home', pins_path, "data-icon" => "home" %>
-  <h1><%= @location %></h1>
+  <h1><%= @pin.name %></h1>
 </div>
 <div data-role="content">
   <h1 style="text-align: center"><%= @wind_mph %> mph <%= @wind_dir %></h1>
-  <ul data-role="listview">
+  <ul data-role="listview" data-inset="true">
     <% @days.each do |day| %>
       <% date = day["date"] %>
       <li><%= date["weekday_short"] %> <%= date["month"] %>/<%= date["day"] %>: <%= day["maxwind"]["mph"] %> mph <%= day["maxwind"]["dir"] %></li>
@@ -12,12 +12,11 @@
   </ul>
 </div>
 <div data-role="footer" data-id="mainFooter" data-position="fixed">
-  <div data-role="navbar" data-grid="c">
+  <div data-role="navbar">
     <ul class="apple-navbar-ui comboSprite">
       <li><a href=<%= "/pins/#{@pin.id}" %>>Maps</a></li>
       <li><a href=<%= "/pins/#{@pin.id}/hourly" %>>Hourly</a></li>
-      <li><a href="#">Daily</a></li>
-      <li><a href=<%= "/pins/#{@pin.id}/historical" %>>History</a></li>
+      <li class="ui-btn-active ui-state-persist"><a href="#">Daily</a></li>
     </ul>
   </div>
 </div>

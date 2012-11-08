@@ -1,6 +1,32 @@
+<script>
+  function callback(object) {
+    $("#latinput").val(object.getAttribute('latitude'));
+    $("#lnginput").val(object.getAttribute('longitude'));
+    $("#nameinput").val(object.getAttribute('name'));
+    $("#myform").submit();
+  };
+</script>
+
 <div data-role="header">
   <%= link_to 'Home', pins_path, "data-icon" => "home" %>
   <h1>New Pin (Temporary)</h1>
-</div data-role="header">
+</div>
 
-<%= render 'form' %>
+<div data-role="body">
+  <%= render "search_form" %>
+  <ul id="list" data-role="listview">
+    <% @results.each do |result|%>
+      <li>
+        <a href="#" name="<%= result[:name] %>" latitude="<%= result[:latitude] %>" longitude="<%= result[:longitude]%>" onclick="callback(this)">
+          <%= result[:name] %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+  <%= form_for @pin, html: { id: "myform" } do |f| %>
+    <%= f.hidden_field :name, id: "nameinput" %>
+    <%= f.hidden_field :latitude, id: "latinput" %>
+    <%= f.hidden_field :longitude, id: "lnginput" %>
+    <%= f.hidden_field :user_id, value: session[:user_id] %>
+  <% end %>
+</div>
