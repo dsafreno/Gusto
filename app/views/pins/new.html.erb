@@ -1,15 +1,6 @@
-<script>
-  function callback(object) {
-    $("#latinput").val(object.getAttribute('latitude'));
-    $("#lnginput").val(object.getAttribute('longitude'));
-    $("#nameinput").val(object.getAttribute('name'));
-    $("#myform").submit();
-  };
-</script>
-
 <div data-role="header">
   <%= link_to 'Home', pins_path, "data-icon" => "home" %>
-  <h1>New Pin (Temporary)</h1>
+  <h1>New Pin</h1>
 </div>
 
 <div data-role="body">
@@ -17,7 +8,7 @@
   <ul id="list" data-role="listview">
     <% @results.each do |result|%>
       <li>
-        <a href="#" name="<%= result[:name] %>" latitude="<%= result[:latitude] %>" longitude="<%= result[:longitude]%>" onclick="callback(this)">
+        <a href="#" name="<%= result[:name] %>" latitude="<%= result[:latitude] %>" longitude="<%= result[:longitude]%>" onclick="new_pin_callback(this)">
           <%= result[:name] %>
         </a>
       </li>

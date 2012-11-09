@@ -6,8 +6,30 @@
   <%= javascript_include_tag "application" %>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+  <link rel="apple-touch-icon" href="<%= asset_path("icon.png") %>" />
+  <link rel="apple-touch-startup-image" href="<%= asset_path("launch.png") %>" />
+
   <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+  <script>
+  function user_loc_create() {
+    navigator.geolocation.getCurrentPosition(foundLocation, noLocation);
+  };
+  function foundLocation(position) {
+    var lat = position.coords.latitude;
+    var long = position.coords.longitude;
+    $(#userlatinput).val(lat);
+    $(#userlnginput).val(long);
+    $(#loc_form).submit();
+  };
+  function noLocation() {};
+  function new_pin_callback(object) {
+    $("#latinput").val(object.getAttribute('latitude'));
+    $("#lnginput").val(object.getAttribute('longitude'));
+    $("#nameinput").val(object.getAttribute('name'));
+    $("#myform").submit();
+  };
+  </script>
   <%= csrf_meta_tags %>
 </head>
 <body>
