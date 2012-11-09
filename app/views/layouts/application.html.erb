@@ -22,10 +22,9 @@
     var long = position.coords.longitude;
     $('#pin_latitude').val(lat);
     $('#pin_longitude').val(long);
-    alert("IM HERE!!");
     $('#loc_form').submit();
   };
-  function noLocation() { alert("OH NO! There was an error.")};
+  function noLocation() { alert("Oh No! There was an error retrieving your location.")};
   function new_pin_callback(object) {
     $("#latinput").val(object.getAttribute('latitude'));
     $("#lnginput").val(object.getAttribute('longitude'));
@@ -37,10 +36,8 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
   <div data-role="page">
     <%= yield %>
   </div>
-
 </body>
 </html>
