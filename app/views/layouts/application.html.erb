@@ -18,16 +18,14 @@
     navigator.geolocation.getCurrentPosition(foundLocation, noLocation);
   };
   function foundLocation(position) {
-    console.log(position);
     var lat = position.coords.latitude;
     var long = position.coords.longitude;
     $('#pin_latitude').val(lat);
     $('#pin_longitude').val(long);
-    console.log(lat);
-    console.log(long);
+    alert("IM HERE!!");
     $('#loc_form').submit();
   };
-  function noLocation() {};
+  function noLocation() { alert("OH NO! There was an error.")};
   function new_pin_callback(object) {
     $("#latinput").val(object.getAttribute('latitude'));
     $("#lnginput").val(object.getAttribute('longitude'));
