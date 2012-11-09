@@ -12,6 +12,6 @@ class SessionsController < ApplicationController
   end
   def destroy
     reset_session
-    redirect_to "/signup"
+    redirect_to :root
   end
 end

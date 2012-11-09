@@ -1,16 +1,21 @@
 <div data-role="header" id="page_header">
   <%= link_to "Sign out", "/sessions/destroy", method: :delete %>
   <h1>My Pins</h1>
-  <a onclick="user_loc_create()" href="#">CurrLoc</a>
+  <a id="userloc" href="#">CurrLoc</a>
 </div>
 
 <div data-role="content">
   <%= render "search_form" %>
   <%= render "loc_form" %>
-  <ul data-role="listview">
-    <% @pins.each do |pin| %>
-      <li><%= link_to pin.name, pin %></li>
-    <% end %>
-  </ul>
+  <h1 style="text-align: center;">History</h1>
+  <% if @pins.empty? %>
+    <p>You don't have a history! Make your first search above or press the button in the top right to go to your current location.</p>
+  <% else %>
+    <ul data-role="listview" data-inset="true">
+      <% @pins.each do |pin| %>
+        <li><%= link_to pin.name, pin %></li>
+      <% end %>
+    </ul>
+  <% end %>
 </div>
 <br/>

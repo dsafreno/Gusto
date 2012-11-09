@@ -18,11 +18,14 @@
     navigator.geolocation.getCurrentPosition(foundLocation, noLocation);
   };
   function foundLocation(position) {
+    console.log(position);
     var lat = position.coords.latitude;
     var long = position.coords.longitude;
-    $(#userlatinput).val(lat);
-    $(#userlnginput).val(long);
-    $(#loc_form).submit();
+    $('#pin_latitude').val(lat);
+    $('#pin_longitude').val(long);
+    console.log(lat);
+    console.log(long);
+    $('#loc_form').submit();
   };
   function noLocation() {};
   function new_pin_callback(object) {
@@ -31,6 +34,7 @@
     $("#nameinput").val(object.getAttribute('name'));
     $("#myform").submit();
   };
+  $("#userloc").live("click", user_loc_create);
   </script>
   <%= csrf_meta_tags %>
 </head>
