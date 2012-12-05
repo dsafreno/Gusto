@@ -7,12 +7,12 @@
 <div data-role="content" data-theme="b">
   <%= render "search_form" %>
   <%= render "loc_form" %>
-  <h1 style="text-align: center;">History</h1>
+  <h1 style="text-align: center;" class="onimage">History</h1>
   <% if @pins.empty? %>
     <% if session[:user_id] %>
-      <p>You don't have a history! Make your first search above or press the button in the top right to go to your current location.</p>
+      <p class="onimage">You don't have a history! Make your first search above or press the button in the top right to go to your current location.</p>
     <% else %>
-      <p> You are not logged in, so we unfortunately cannot store your history. Please make an account or sign in!</p>
+      <p class="onimage"> You are not logged in, so we unfortunately cannot store your history. Please make an account or sign in!</p>
     <% end %>
   <% else %>
     <ul data-role="listview" data-inset="true" data-theme="b">

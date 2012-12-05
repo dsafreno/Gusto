@@ -19,3 +19,11 @@
 .alignright {
   float: right;
 }
+
+.onimage {
+  color: silver;
+}
+
+label {
+  color: silver;
+}

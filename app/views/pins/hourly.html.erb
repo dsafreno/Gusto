@@ -3,7 +3,7 @@
   <h1><%= @pin.name %></h1>
 </div>
 <div data-role="content" data-theme="b">
-  <h1 style="text-align: center"><%= @wind_mph %> mph <%= @wind_dir %></h1>
+  <h1 style="text-align: center" class="onimage"><%= @wind_mph %> mph <%= @wind_dir %></h1>
   <ul data-role="listview" data-inset="true">
     <% @hourlies.each do |hour| %>
       <li><%= hour["FCTTIME"]["civil"] %>: <%= hour["wspd"]["english"] %> mph <%= hour["wdir"]["dir"] %></li>
