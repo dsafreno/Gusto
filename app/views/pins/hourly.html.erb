@@ -1,8 +1,8 @@
-<div data-role="header">
+<div data-role="header" data-theme="b">
   <%= link_to 'Home', pins_path, "data-icon" => "home" %>
   <h1><%= @pin.name %></h1>
 </div>
-<div data-role="content">
+<div data-role="content" data-theme="b">
   <h1 style="text-align: center"><%= @wind_mph %> mph <%= @wind_dir %></h1>
   <ul data-role="listview" data-inset="true">
     <% @hourlies.each do |hour| %>
@@ -10,7 +10,7 @@
     <% end %>
   </ul>
 </div>
-<div data-role="footer" data-id="mainFooter" data-position="fixed">
+<div data-role="footer" data-id="mainFooter" data-theme="b" data-position="fixed">
   <div data-role="navbar">
     <ul class="apple-navbar-ui comboSprite">
       <li><a href=<%= "/pins/#{@pin.id}" %>>Maps</a></li>

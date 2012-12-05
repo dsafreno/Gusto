@@ -1,9 +1,9 @@
-<div data-role="header">
-  <%= link_to 'Back', users_path, "data-icon" => "home", html: { "autocapitalize" => "off"} %>
+<div data-role="header" data-theme="b">
+  <%= link_to 'Back', users_path, "data-icon" => "home", "data-theme" => "b", html: { "autocapitalize" => "off"} %>
   <h1>New user</h1>
 </div>
 
 
-<div data-role="content">
+<div data-role="content" data-theme="b">
   <%= render 'form' %>
 </div>

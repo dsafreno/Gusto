@@ -15,24 +15,28 @@ class PinsController < ApplicationController
     if session[:user_id]
       @pins = Pin.where("user_id = ?", session[:user_id]).sort_by(&:updated_at).reverse
       @pins.each do |pin|
-        next if @@cache[pin]
-        @@cache[pin] = {}
-        open("http://api.wunderground.com/api/c86212bca3562794/conditions/q/#{pin.latitude},#{pin.longitude}.json") do |f|
-          json_string = f.read
-          parsed_json = JSON.parse(json_string)
-          @@cache[pin][:location] = parsed_json['location']['city']
-          @@cache[pin][:wind_mph] = parsed_json['current_observation']['wind_mph']
-          @@cache[pin][:wind_dir] = parsed_json['current_observation']['wind_dir']
-        end
-        open("http://api.wunderground.com/api/c86212bca3562794/hourly/q/#{pin.latitude},#{pin.longitude}.json") do |f|
-          json_string = f.read
-          parsed_json = JSON.parse(json_string)
-          @@cache[pin][:hourly] = parsed_json['hourly_forecast']
-        end
-        open("http://api.wunderground.com/api/c86212bca3562794/forecast10day/q/#{pin.latitude},#{pin.longitude}.json") do |f|
-          json_string = f.read
-          parsed_json = JSON.parse(json_string)
-          @@cache[pin][:daily] = parsed_json['forecast']['simpleforecast']['forecastday']
+        begin
+          next if @@cache[pin]
+          @@cache[pin] = {}
+          open("http://api.wunderground.com/api/c86212bca3562794/conditions/q/#{pin.latitude},#{pin.longitude}.json") do |f|
+            json_string = f.read
+            parsed_json = JSON.parse(json_string)
+            @@cache[pin][:location] = parsed_json['location']['city']
+            @@cache[pin][:wind_mph] = parsed_json['current_observation']['wind_mph']
+            @@cache[pin][:wind_dir] = parsed_json['current_observation']['wind_dir']
+          end
+          open("http://api.wunderground.com/api/c86212bca3562794/hourly/q/#{pin.latitude},#{pin.longitude}.json") do |f|
+            json_string = f.read
+            parsed_json = JSON.parse(json_string)
+            @@cache[pin][:hourly] = parsed_json['hourly_forecast']
+          end
+          open("http://api.wunderground.com/api/c86212bca3562794/forecast10day/q/#{pin.latitude},#{pin.longitude}.json") do |f|
+            json_string = f.read
+            parsed_json = JSON.parse(json_string)
+            @@cache[pin][:daily] = parsed_json['forecast']['simpleforecast']['forecastday']
+          end
+        rescue
+          @pins.delete(pin)
         end
       end
     end

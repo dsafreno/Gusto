@@ -1,10 +1,10 @@
-<div data-role="header" id="page_header">
+<div data-role="header" data-theme="b" id="page_header">
   <%= link_to "Sign out", "/sessions/destroy", method: :delete %>
   <h1>My Locations</h1>
   <a id="userloc" href="#">CurrLoc</a>
 </div>
 
-<div data-role="content">
+<div data-role="content" data-theme="b">
   <%= render "search_form" %>
   <%= render "loc_form" %>
   <h1 style="text-align: center;">History</h1>
@@ -15,7 +15,7 @@
       <p> You are not logged in, so we unfortunately cannot store your history. Please make an account or sign in!</p>
     <% end %>
   <% else %>
-    <ul data-role="listview" data-inset="true">
+    <ul data-role="listview" data-inset="true" data-theme="b">
       <% @pins.each do |pin| %>
         <li><%= link_to pin.name, pin %></li>
       <% end %>

@@ -1,14 +1,14 @@
-<div data-role="header">
-  <%= link_to 'Back', users_path, "data-icon" => "home" %>
+<div data-role="header" data-theme="b">
+  <%= link_to 'Back', users_path, "data-theme" => "b", "data-icon" => "home" %>
   <h1>Sign In!</h1>
 </div>
 
-<div data-role="content">
+<div data-role="content" data-theme="b">
   <%= form_for(:session, url: sessions_path) do |f| %>
-    <%= f.label :username %>
-    <%= f.text_field :username, html: { "autocapitalize" => "off"} %>
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-    <%= f.submit "Sign in"%>
+    <%= f.label :username, "data-theme" => "b" %>
+    <%= f.text_field :username, "data-theme" => "b", html: { "autocapitalize" => "off"} %>
+    <%= f.label :password, "data-theme" => "b" %>
+    <%= f.password_field :password, "data-theme" => "b" %>
+    <%= f.submit "Sign in", "data-theme" => "b"%>
   <% end %>
 </div>
