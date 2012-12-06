@@ -27,3 +27,7 @@
 label {
   color: silver;
 }
+
+.crosshair {
+	background-image: url("/assets/crosshair-high.png") !important;
+}
