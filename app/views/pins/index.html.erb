@@ -1,5 +1,9 @@
 <div data-role="header" data-theme="b" id="page_header">
-  <%= link_to "Sign out", "/sessions/destroy", method: :delete %>
+  <% if session[:user_id] %>
+    <%= link_to "Sign Out", "/sessions/destroy", method: :delete %>
+  <% else %>
+    <%= link_to "Sign In", "/sessions/new" %>
+  <% end %>
   <h1>My Locations</h1>
   <a id="userloc" class="crosshair" href="#" style="height:30px;"></a>
 </div>
